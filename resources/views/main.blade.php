@@ -34,7 +34,30 @@
     </form>
 
     <h3>Eredmények</h3>
-    <p class="text-muted">Itt fognak megjelenni az autók</p>
+    @if(isset($cars) && $cars->count() > 0)
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
+
+            @foreach($cars as $car)
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ $car->image_path }}" class="card-img-top" alt="{{ $car->name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $car->name }}</h5>
+                        <p class="card-text">Ár: {{ number_format($car->price_per_day) }} Ft/nap</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success w-100" disabled>
+                            Foglalás
+                        </button>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
+        </div>
+    @elseif(isset($cars))
+        <p class="text-danger">Ebben az időszakban nincs szabad autó!</p>
+    @endif
 </div>
 
 </body>

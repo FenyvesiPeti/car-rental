@@ -12,4 +12,9 @@ class Car extends Model
         'is_active',
         'image_path',
     ];
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
